@@ -1,0 +1,56 @@
+from django.shortcuts import render, get_object_or_404, redirect
+
+from .models import *
+
+# Create your views here.
+def homepage(request):
+  context = {
+    'Filires':Filier.objects.all(),
+    'semester':Semester.objects.all(),
+  }
+  return render(request,'index.html',context)
+
+def filier_Page(request,fil):
+  try:
+    context = {
+    'Filires':Filier.objects.all(),
+    'semester':Semester.objects.all(),
+    
+    'filire':Filier.objects.get(name = fil),
+    'filireid':Filier.objects.get(name = fil).pk,
+    'Semester':Semester.objects.filter(filierId = Filier.objects.get(name = fil).pk )
+  }
+  except:
+    context = {}
+
+  return render(request,'eduction/filier.html',context)
+
+
+def semister_Page(request,fil,semester):
+  try:
+    context = {
+    'Filires':Filier.objects.all(),
+    'semester':Semester.objects.all(),
+    'filire':Filier.objects.get(name = fil),
+    'Semmester':Semester.objects.get(slug = semester, filierId = Filier.objects.get(name = fil).pk ),
+
+    'filireid':Filier.objects.get(name = fil).pk,
+    'Semester':Semester.objects.filter(slug = semester, filierId = Filier.objects.get(name = fil).pk ),
+    'Module':Module.objects.filter(semmesterid = Semester.objects.get(slug = semester, filierId = Filier.objects.get(name = fil).pk ).pk , filierid = Filier.objects.get(name = fil).pk )
+    }
+  except:
+    context ={}
+  
+  return render(request,'eduction/semester.html',context)
+
+def modulePage(request,fil,semester,modl):
+  q_fil = Filier.objects.get(name = fil)
+  # q_semester = Semester.objects.filter(slug = semester)
+  q_module =  Module.objects.filter(filierid = q_fil.pk,slug = modl)
+  context = {
+    'module':q_module,
+    'Filires':Filier.objects.all(),
+    'semester':Semester.objects.all(),
+    'Courses': Courses.objects.filter(moduleid = Module.objects.get(filierid = q_fil.pk,slug = modl).pk,semesterid = Module.objects.get(filierid = q_fil.pk,slug = modl).semmesterid )
+    }
+  return render(request,'eduction/module.html',context)
