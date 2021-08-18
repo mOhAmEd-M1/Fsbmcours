@@ -1,0 +1,95 @@
+{% extends 'backend/account/logBase.html' %} {% load static %} {% block Heade%}
+<title>| Register </title>{%endblock%} {% block coantainer%}
+<div class="register-box">
+    <div class="register-logo">
+        <a href="{% url 'home' %}"><b>Admin</b>Fsbmcours</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">Register a new membership</p>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="input-group mb-3 col justify-content-center ">
+                    {{form.username}}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3 col justify-content-center">
+                    {{form.email}}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3 col justify-content-center">
+                    {{form.password1}}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3 col justify-content-center">
+                    <!-- <input type="password" class="form-control" placeholder="Retype password"> -->
+                    {{form.password2}}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                <label for="agreeTerms">
+                 I agree to the <a href="#">terms</a>
+                </label>
+              </div>
+            </div> -->
+                    <!-- /.col -->
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <!-- <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-primary">
+                    <i class="fab fa-facebook mr-2"></i> Sign up using Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-danger">
+                    <i class="fab fa-google-plus mr-2"></i> Sign up using Google+
+                </a>
+            </div> -->
+
+            <a href="{% url 'login'%}" class="text-center">I already have a membership</a>
+        </div>
+        <!-- /.form-box -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+<script>
+    //Query All input fields
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder = 'Username..';
+    form_fields[2].placeholder = 'Email..';
+    form_fields[3].placeholder = 'Enter password...';
+    form_fields[4].placeholder = 'Re-enter Password...';
+
+
+    for (var field in form_fields) {
+        form_fields[field].className += ' form-control'
+    }
+</script>
+{%endblock%}

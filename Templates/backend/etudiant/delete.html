@@ -1,0 +1,27 @@
+{% extends 'backend/main/master.html' %}
+{% load static %}
+{%block head%}<title> |Delete {{item}}</title>{% endblock%}
+{%block container%}
+<br>
+<div class="row">
+    <div class="col-12">
+        <div class="callout callout-danger">
+            <h5><i class="fas fa-check"></i> Are you sure you want to delete "{{item}}"?</h5>
+			<h6>
+                Type : <strong>{{Type}}</strong><br>
+                Details : <br>
+                <small>ID : {{item.pk}}</small><br>
+                <small>Filier : {{item.filier}}</small><br>
+                <small>semmester : {{item.semmester}}</small><br>
+                <small>module : {{item.module}}</small><br>
+			</h6>
+			<form action="{% url 'Del' Type  item.id %}" method="POST">
+				{% csrf_token %}
+				<a class="btn btn-warning" href="{% url 'moduleBackend' item.filier item.semmesterID modl%}">Cancel</a>
+				<button class="btn btn-danger" type="submit" name="Confirm">Conform</button>
+			</form>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+{%endblock%}
