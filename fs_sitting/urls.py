@@ -8,8 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^Media/(?P<path>.*)$',serve , {'document_root':settings.MEDIA_ROOT}),
     url(r'^static/(?P<path>.*)$',serve , {'document_root':settings.STATIC_ROOT}),
+    path('Panel/',include('panel.urls')),
     path('',include('eduction.urls')),
-    path('panel/',include('panel.urls'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

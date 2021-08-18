@@ -45,10 +45,14 @@ def semister_Page(request,fil,semester):
 
 def modulePage(request,fil,semester,modl):
   q_fil = Filier.objects.get(name = fil)
+  qs_module = Module.objects.get(filierid = q_fil.pk,slug = modl)
   # q_semester = Semester.objects.filter(slug = semester)
   q_module =  Module.objects.filter(filierid = q_fil.pk,slug = modl)
+  fileNumber = qs_module.ccount  + qs_module.Tdcount + qs_module.tpcount + qs_module.ecount
   context = {
     'module':q_module,
+
+    'fileNumber':fileNumber,
     'Filires':Filier.objects.all(),
     'semester':Semester.objects.all(),
     'Courses': Courses.objects.filter(moduleid = Module.objects.get(filierid = q_fil.pk,slug = modl).pk,semesterid = Module.objects.get(filierid = q_fil.pk,slug = modl).semmesterid )

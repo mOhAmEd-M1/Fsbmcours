@@ -5,7 +5,7 @@ from django.urls import reverse
 import os
 import uuid
 import random
-from datetime import datetime 
+from datetime import datetime
 
 
 def user_directory_path(instance,filename):
@@ -92,7 +92,6 @@ class Semester(models.Model):
         ordering = ['name']
 
 class Module(models.Model):
-
     name = models.CharField(max_length=150)
     semmesterid = models.IntegerField(default=0,null=True, blank=True)
     filierid = models.IntegerField(default=0,null=True, blank=True)

@@ -65,7 +65,7 @@
                 {% for sem in semester %}
                   {% if sem.filierId == fil.pk %}
                   <li class="nav-item submenu dropdown">
-                    <a class="nav-link" href="courses.html">{{sem.name}}</a>
+                    <a class="nav-link" href="{{sem.module_list}}">{{sem.name}}</a>
                   </li>
                   {% endif %}
                 {% endfor %}
