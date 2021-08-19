@@ -1,6 +1,10 @@
 from django.shortcuts import render
-
+from eduction.models import *
 # Create your views here.
 def homepanel(request):
-  context = {}
-  return render(request,'panel/index.html',context)
+  context = {
+    'Filiers':Filier.objects.all(),
+    'Semmesters':Semester.objects.all(),
+    'modulesn':Module.objects.all(),
+  }
+  return render(request,'backend/main/home.html',context)

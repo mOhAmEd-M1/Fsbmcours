@@ -8,5 +8,5 @@ from panel import views
 
 
 urlpatterns = [
-   path('home/',views.homepanel,name="panel"),
+   path('',views.homepanel,name="panel"),
 ]

@@ -78,21 +78,21 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/Panel" class="brand-link">
-                <img src="{% static 'front/img/logo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="{% static 'img/favicon.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">FSBMCOURS</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
                         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{user.username}}</a>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -101,19 +101,38 @@
                with font-awesome or any other icon font library -->
                         <!-- <li class="nav-header">Article</li> -->
                         <li class="nav-item">
-                            <a href="{% url 'panel'%}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="nav-icon far fa-circle  text-primary"></i>
                                 <p>Home</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'MessageList'%}" class="nav-link">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon far fa-circle  text-primary"></i>
+                                <p>NewsLeter</p>
+                                <span class="badge badge-info right">{{count}}6</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
                                 <i class="nav-icon far fa-circle  text-primary"></i>
                                 <p>Messages</p>
+                                <span class="badge badge-info right">{{count}}12</span>
+
+                            </a>
+                        </li>
+                        <li class="nav-header">ETUDIANT</li>
+                        {% for Filier in Filiers %}
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-user-graduate text-danger"></i>
+                                <p>{{Filier.name}}</p>
                                 <span class="badge badge-info right">{{count}}</span>
 
                             </a>
                         </li>
+                        {% endfor %}
+                        <li class="nav-header">Articles</li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon  fas fa-newspaper text-primary"></i>
@@ -125,7 +144,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{% url 'CatManager'%}" class="nav-link">
+                                    <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle  text-primary"></i>
                                         <p>Catagury</p>
                                     </a>
@@ -138,13 +157,13 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="{% url 'tagsAdd'%}" class="nav-link">
+                                            <a href="" class="nav-link">
                                                 <i class="nav-icon far fa-circle  text-primary"></i>
                                                 <p>Add</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{% url 'tags'%}" class="nav-link">
+                                            <a href="" class="nav-link">
                                                 <i class="nav-icon far fa-circle  text-primary"></i>
                                                 <p>List</p>
                                             </a>
@@ -152,7 +171,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'ArticleManager' %}" class="nav-link">
+                                    <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle  text-primary"></i>
                                         <p>Art Manage</p>
                                     </a>
@@ -166,7 +185,7 @@
                               <ul class="nav nav-treeview">
                                 {% for cat in Cats%}
                                   <li class="nav-item">
-                                    <a href="{% url 'ArticleManager' %}" class="nav-link">
+                                    <a href="" class="nav-link">
                                       <i class="nav-icon far fa-circle  text-primary"></i>
                                       <p>{{cat.name}}</p>
                                     </a>
@@ -176,6 +195,7 @@
                             </li> -->
                             </ul>
                         </li>
+                        <li class="nav-header">Books</li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-book  text-primary"></i>
@@ -185,74 +205,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{% url 'booksBackadd'%}" class="nav-link">
+                                    <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle  text-primary"></i>
                                         <p>Add</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'booksBackList'%}" class="nav-link">
+                                    <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle  text-primary"></i>
                                         <p>List</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-header">ETUDIANT</li>
-                        <li class="nav-item">
-                            <a href="{% url 'filierList'%}" class="nav-link">
-                                <i class="nav-icon far fa-circle  text-primary"></i>
-                                <p>Filier </p>
-                            </a>
-                        </li>
-                        {% for Fil in Filiers %}
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user-graduate text-danger"></i>
-                                <p>
-                                    {{Fil.name}}
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{% url 'filierBackend' filback=Fil.name %}" class="nav-link">
-                                        <i class="nav-icon fas text-warning fa-chart-pie"></i>
-                                        <p>Semmester Manage</p>
-                                    </a>
-                                </li>
-                                {% for semmester in Semmesters%} {% if semmester.filierId == Fil.pk %}
-                                <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle text-warning nav-icon"></i>
-                                        <p>
-                                            {{semmester.name}}
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="{% url 'semesterBackend' semmester.filier semmester.pk%}" class="nav-link">
-                                                <i class="nav-icon fas text-info fa-chart-pie"></i>
-                                                <p>Module Manage</p>
-                                            </a>
-                                        </li>
-                                        {% for module in modulesn%} {% if module.semmesteriD == semmester.pk and module.filieriD == semmester.filierId %}
-                                        <li class="nav-item ">
-                                            <a href="{% url 'moduleBackend' module.filier module.semmesteriD module.slug %}" class="nav-link">
-                                                <i class="far fa-circle text-warning nav-icon"></i>
-                                                <p>
-                                                    {{module.name}}
-                                                </p>
-                                            </a>
-                                        </li>
-                                        {%endif%} {%endfor%}
-                                    </ul>
-                                </li>
-                                {%endif%} {%endfor%}
-                            </ul>
-                        </li>
-                        {%endfor%}
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
