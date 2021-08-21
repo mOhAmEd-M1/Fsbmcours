@@ -8,3 +8,7 @@ def homepanel(request):
     'modulesn':Module.objects.all(),
   }
   return render(request,'backend/main/home.html',context)
+
+def FilierPanelPage(request):
+  context = {}
+  return render(request,'backend/education/index.html',context)

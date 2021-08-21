@@ -9,4 +9,5 @@ from panel import views
 
 urlpatterns = [
    path('',views.homepanel,name="panel"),
+   path('<filier>/',views.FilierPanelPage,name="filier-panel-page"),
 ]
