@@ -1,5 +1,7 @@
 from django.db.models import query
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import Http404
+
 
 from .models import *
 
@@ -15,20 +17,19 @@ def homepage(request):
   return render(request,'index.html',context)
 
 def filier_Page(request,fil):
-  q_fil = Filier.objects.get(name = fil)
   try:
     context = {
     'Filires':Filier.objects.all(),
     'semester':Semester.objects.all(),
-    'Courses':Courses.objects.filter(filierid = q_fil.pk).order_by('-pk')[:7],
-    'Module':Module.objects.filter(filierid = q_fil.pk),
+    'Courses':Courses.objects.filter(filierid = Filier.objects.get(name = fil).pk).order_by('-pk')[:7],
+    'Module':Module.objects.filter(filierid = Filier.objects.get(name = fil).pk),
 
     'filire':Filier.objects.get(name = fil),
     'filireid':Filier.objects.get(name = fil).pk,
     'Semester':Semester.objects.filter(filierId = Filier.objects.get(name = fil).pk )
   }
   except:
-    context = {}
+    raise Http404()
 
   return render(request,'eduction/filier.html',context)
 

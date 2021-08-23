@@ -18,34 +18,7 @@
     <!-- /.col -->
 </div>
 <!-- /.row -->
-<div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <!-- ./card-body -->
-        <div class="card-footer">
-          <div class="row">
-            {% for module in modules %}
-            <div class="col-sm col">
-              <div class="description-block border-right">
-                
-                <h5 class="description-header">{{module.show}} View</h5>
-                <span class="description-text">{{module.name}}</span>
-                <p class="description-text">
-                  <small>{{module.filier}}</small>
-                </p>
-              </div>
-              <!-- /.description-block -->
-            </div>
-            {%endfor%}
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.card-footer -->
-      </div>
-      <!-- /.card -->
-    </div>
-    <!-- /.col -->
-  </div>
+
   {%if lenEmail != 0%}
   <!-- /.row -->
   <div class="row">

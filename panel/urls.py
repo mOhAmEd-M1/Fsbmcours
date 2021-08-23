@@ -9,5 +9,19 @@ from panel import views
 
 urlpatterns = [
    path('',views.homepanel,name="panel"),
+   
    path('<filier>/',views.FilierPanelPage,name="filier-panel-page"),
+   path('<filier>/delete/',views.DeleteFilier,name="DeleteFilier-panel-page"),
+   path('<filier>/create/',views.CreateFilier,name="CreateFilier-panel-page"),
+   path('<filier>/edit/',views.EditFilier,name="EditFilier-panel-page"),
+
+   path('<filier>/<semster>/',views.SemesterPanelPage,name="semster-panel-page"),
+   path('<filier>/<semster>/delete/',views.DeleteSemester,name="DeleteSemester-panel-page"),
+   path('<filier>/create/',views.CreateSemester,name="CreateSemester-panel-page"),
+   path('<filier>/<semster>/edit/',views.EditSemester,name="EditSemester-panel-page"),
+
+   path('<filier>/<semster>/<modl>/',views.ModulePanelPage,name="modl-panel-page"),
+   path('<filier>/<semster>/<modl>/delete/',views.Deletemodl,name="Deletemodl-panel-page"),
+   path('<filier>/<semster>/create/',views.Createmodl,name="Createmodl-panel-page"),
+   path('<filier>/<semster>/<modl>/edit/',views.Editmodl,name="Editmodl-panel-page"),
 ]

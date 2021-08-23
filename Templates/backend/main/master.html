@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge"> {%block head%}{% endblock%}
 
+    <link rel="icon" href="{%static 'img/favicon.png'  %}" type="image/png" />
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{% static 'back/plugins/fontawesome-free/css/all.min.css'%}">
     <!-- overlayScrollbars -->
@@ -123,13 +124,39 @@
                         </li>
                         <li class="nav-header">ETUDIANT</li>
                         {% for Filier in Filiers %}
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fas fa-user-graduate text-danger"></i>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book  text-primary"></i>
+                                <!-- <i class="nav-icon far fa-circle  text-primary"></i> -->
                                 <p>{{Filier.name}}</p>
-                                <span class="badge badge-info right">{{count}}</span>
-
+                                <i class="right fas fa-angle-left"></i>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle  text-primary"></i>
+                                        <p>Index</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{Filier.filierBackendDetails}}" class="nav-link">
+                                        <i class="nav-icon far fa-circle  text-primary"></i>
+                                        <p>Semester</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% for sm in SM %}{% if sm.filierId == Filier.pk %}{{sm.SemesterPanelPage}}{% endif %}{% endfor %}" class="nav-link">
+                                        <i class="nav-icon far fa-circle  text-primary"></i>
+                                        <p>module</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle  text-primary"></i>
+                                        <p>Courses</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         {% endfor %}
                         <li class="nav-header">Articles</li>

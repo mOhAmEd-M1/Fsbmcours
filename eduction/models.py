@@ -56,11 +56,16 @@ class Filier(models.Model):
     def semester_list(self):
         return reverse('Semester-List', kwargs={'fil': self.name})
     
+    
+    # backEnd fuction
+    def filierBackendDetails(self):
+        return reverse('filier-panel-page', kwargs={'filier': self.name})
+
     def get_update_url(self):
-        return reverse('filier-update', kwargs={'id': self.pk})
+        return reverse('EditFilier-panel-page', kwargs={'filier':  self.name})
 
     def get_delete_url(self):
-        return reverse('post-delete', kwargs={'id': self.pk})
+        return reverse('DeleteFilier-panel-page', kwargs={'filier':  self.name})
 
 class Semester(models.Model):
     name = models.CharField(max_length=150)
@@ -82,12 +87,18 @@ class Semester(models.Model):
     def module_list(self):
         Query = Filier.objects.get(pk=self.filierId)
         return reverse('semister-name', kwargs={ 'fil': Query.name ,'semester' : self.slug })
+
+    def SemesterPanelPage(self):
+        Query = Filier.objects.get(pk=self.filierId)
+        return reverse('semster-panel-page',kwargs={"filier":Query.name,"semster":self.slug})
+
     def get_update_url(self):
         Query = Filier.objects.get(pk=self.filierId)
-        return reverse('semester-update', kwargs={'pk': self.pk ,'fil':Query.name})
+        return reverse('EditSemester-panel-page', kwargs={"filier":Query.name,"semster":self.slug})
 
     def get_delete_url(self):
-        return reverse('post-delete', kwargs={'id': self.pk})
+        Query = Filier.objects.get(pk=self.filierId)
+        return reverse('DeleteSemester-panel-page', kwargs={"filier":Query.name,"semster":self.slug})
     class Meta:
         ordering = ['name']
 
