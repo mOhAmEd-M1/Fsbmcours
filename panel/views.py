@@ -17,3 +17,14 @@ def homepanel(request):
 
   }
   return render(request,'backend/main/home.html',context)
+
+def filierpnelPage(request,fil):
+  context = {
+    'Filiers':Filier.objects.all(),
+    'Semmesters':Semester.objects.all(),
+    'modulesn':Module.objects.all(),
+
+
+    'SM':Semester.objects.all(),
+  }
+  return render(request,"backend/education/index.html",context)

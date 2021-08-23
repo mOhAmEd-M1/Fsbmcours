@@ -1,0 +1,84 @@
+{% extends 'backend/main/master.html' %} {% load static%} {%block head%}
+<title>{{Q_filier.name}} |Panel</title>{% endblock%} {%block container%}
+<div class="row">
+    <div class="col-12">
+        <div class="callout callout-danger">
+            <div class="card-tools text-right">
+                <button type="button" class="btn btn-tool">
+          <a href=""><i class="fas fa-pencil-alt"></i></a>
+        </button>
+                <button type="button" class="btn btn-tool">
+          <a href=""><i class="fas fa-trash"></i></a>
+        </button>
+            </div>
+            <h5><i class="fas fa-check"></i> Note:</h5>
+            This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+   
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-lg connectedSortable">
+        <!-- TO DO List -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="ion ion-clipboard mr-1"></i>
+              To Do List
+            </h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <ul class="todo-list" data-widget="todo-list">
+              {% for sem in Semesters %}
+              <li>
+                <!-- checkbox -->
+                <div  class="icheck-primary d-inline ml-2">
+                  <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                  <label for="todoCheck1"></label>
+                </div>
+                <!-- todo text -->
+                <span class="text">{{sem.name}}</span>
+                <!-- Emphasis label -->
+                <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
+                <!-- General tools such as edit or delete-->
+                <div class="tools">
+                  <a href="{{sem.get_update_url}}"><i class="fas fa-edit"></i></a>
+                  <a href="{{sem.get_delete_url}}"><i class="fas fa-trash"></i></a>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer clearfix">
+            <a href="
+            {% for fil in Filiers %}
+                {% url 'CreateSemester-panel-page' fil.name %}
+            {% endfor %}
+            " type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</a>
+          </div>
+        </div>
+        <!-- /.card -->
+      </section>
+      <!-- /.Left col -->
+    </div>
+    <!-- /.row (main row) -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+{%endblock%} {%block script%}
+<script>
+    var id = '#{{artid.pk}}'
+
+    const trunc = document.querySelector(id);
+    trunc.innerText = trunc.innerText.substring(0, 120) + '...';
+</script>
+{%endblock%}
