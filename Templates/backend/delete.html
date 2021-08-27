@@ -13,9 +13,9 @@
                 {% if Semester %} Semester : <br> {% for modl in Semester %} <small> {{modl.name}}</small><br>{%endfor%}{%endif%}
                {% if cours %} cours : <br> {% for modl in cours %} <small> {{modl.name}}</small><br>{%endfor%}{%endif%}
 			</h6>
-			<form action="{% url 'DeleteFilier' item.id  %}" method="POST">
+			<form action="{% url 'DeleteFilier-panel-page' item.name %}" method="POST">
 				{% csrf_token %}
-				<a class="btn btn-warning" href="{% url 'filierList' %}">Cancel</a>
+				<a class="btn btn-warning" href="">Cancel</a>
 				<button class="btn btn-danger" type="submit" name="Confirm">Conform</button>
 			</form>
         </div>

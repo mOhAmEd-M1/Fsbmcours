@@ -18,7 +18,7 @@ def homepanel(request):
   }
   return render(request,'backend/main/home.html',context)
 
-def filierpnelPage(request,fil):
+def filierpnelPage(request):
   context = {
     'Filiers':Filier.objects.all(),
     'Semmesters':Semester.objects.all(),

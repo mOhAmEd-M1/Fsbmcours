@@ -36,7 +36,7 @@ def user_directory_path(instance,filename):
         month = 'November'
     elif month == 12:
         month = 'December'
-    path =f"Course/{month}-{todays_date.year}/"
+    path =f"Course/{todays_date.day}{month}-{todays_date.year}/"
     extension = "." + filename.split('.')[-1]
     stringId = str(uuid.uuid4())
     randInt = str(random.randint(0, 9))
@@ -56,8 +56,9 @@ class Filier(models.Model):
     def semester_list(self):
         return reverse('Semester-List', kwargs={'fil': self.name})
     
-    
     # backEnd fuction
+    # def SemesterPanelPage(self):
+    #     return reverse('semster-panel-page')
     def filierBackendDetails(self):
         return reverse('filier-panel-page', kwargs={'filier': self.name})
 
@@ -84,13 +85,14 @@ class Semester(models.Model):
             self.slug = slug
        
         super().save(*args, **kwargs)
+
     def module_list(self):
         Query = Filier.objects.get(pk=self.filierId)
         return reverse('semister-name', kwargs={ 'fil': Query.name ,'semester' : self.slug })
 
-    def SemesterPanelPage(self):
-        Query = Filier.objects.get(pk=self.filierId)
-        return reverse('semster-panel-page',kwargs={"filier":Query.name,"semster":self.slug})
+    # def SemesterPanelPage(self):
+    #     Query = Filier.objects.get(pk=self.filierId)
+    #     return reverse('semster-panel-page')
 
     def get_update_url(self):
         Query = Filier.objects.get(pk=self.filierId)
@@ -132,6 +134,7 @@ class Courses(models.Model):
         ('Traveaux pratique','Traveaux pratique'),
         ('exam','Exam')
     ]
+
     C_type =models.CharField(max_length=200, choices=CATEGORY_CHOICES , default='choices ...')
     name = models.CharField(max_length=150)
     moduleid = models.IntegerField(default=0)

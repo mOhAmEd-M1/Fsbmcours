@@ -123,6 +123,12 @@
                             </a>
                         </li>
                         <li class="nav-header">ETUDIANT</li>
+                        <li class="nav-item">
+                            <a href="{% url 'filierpnelPage' %}" class="nav-link">
+                                <i class="nav-icon far fa-circle  text-primary"></i>
+                                <p>Index</p>
+                            </a>
+                        </li>
                         {% for Filier in Filiers %}
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -132,12 +138,7 @@
                                 <i class="right fas fa-angle-left"></i>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link">
-                                        <i class="nav-icon far fa-circle  text-primary"></i>
-                                        <p>Index</p>
-                                    </a>
-                                </li>
+                                
                                 <li class="nav-item">
                                     <a href="{{Filier.filierBackendDetails}}" class="nav-link">
                                         <i class="nav-icon far fa-circle  text-primary"></i>
@@ -145,7 +146,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% for sm in SM %}{% if sm.filierId == Filier.pk %}{{sm.SemesterPanelPage}}{% endif %}{% endfor %}" class="nav-link">
+                                    <a href="{% url 'semster-panel-page' %}" class="nav-link">
                                         <i class="nav-icon far fa-circle  text-primary"></i>
                                         <p>module</p>
                                     </a>
