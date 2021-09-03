@@ -53,21 +53,7 @@ class Filier(models.Model):
     def __str__(self):
         return self.name
     
-    def semester_list(self):
-        return reverse('Semester-List', kwargs={'fil': self.name})
-    
-    # backEnd fuction
-    # def SemesterPanelPage(self):
-    #     return reverse('semster-panel-page')
-    def filierBackendDetails(self):
-        return reverse('filier-panel-page', kwargs={'filier': self.name})
-
-    def get_update_url(self):
-        return reverse('EditFilier-panel-page', kwargs={'filier':  self.name})
-
-    def get_delete_url(self):
-        return reverse('DeleteFilier-panel-page', kwargs={'filier':  self.name})
-
+   
 class Semester(models.Model):
     name = models.CharField(max_length=150)
     count = models.IntegerField(default=0)
@@ -86,21 +72,6 @@ class Semester(models.Model):
        
         super().save(*args, **kwargs)
 
-    def module_list(self):
-        Query = Filier.objects.get(pk=self.filierId)
-        return reverse('semister-name', kwargs={ 'fil': Query.name ,'semester' : self.slug })
-
-    # def SemesterPanelPage(self):
-    #     Query = Filier.objects.get(pk=self.filierId)
-    #     return reverse('semster-panel-page')
-
-    def get_update_url(self):
-        Query = Filier.objects.get(pk=self.filierId)
-        return reverse('EditSemester-panel-page', kwargs={"filier":Query.name,"semster":self.slug})
-
-    def get_delete_url(self):
-        Query = Filier.objects.get(pk=self.filierId)
-        return reverse('DeleteSemester-panel-page', kwargs={"filier":Query.name,"semster":self.slug})
     class Meta:
         ordering = ['name']
 
@@ -122,10 +93,7 @@ class Module(models.Model):
         super().save(*args, **kwargs)
     def __str__(self):
         return  self.name  
-    def module_Detail(self):
-        Query = Filier.objects.get(pk=self.filierid)
-        Query1 = Semester.objects.get(pk=self.semmesterid)
-        return reverse('module-Detail', kwargs={ 'fil': Query.name ,'semester' : Query1.slug ,'modl':self.slug })
+    
 
 class Courses(models.Model):
     CATEGORY_CHOICES = [

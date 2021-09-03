@@ -126,7 +126,7 @@
                         <li class="nav-item">
                             <a href="{% url 'filierpnelPage' %}" class="nav-link">
                                 <i class="nav-icon far fa-circle  text-primary"></i>
-                                <p>Index</p>
+                                <p>Filier List</p>
                             </a>
                         </li>
                         {% for Filier in Filiers %}
@@ -140,21 +140,21 @@
                             <ul class="nav nav-treeview">
                                 
                                 <li class="nav-item">
-                                    <a href="{{Filier.filierBackendDetails}}" class="nav-link">
+                                    <a href="{% url 'filier-panel-page' Filier.name %}" class="nav-link">
                                         <i class="nav-icon far fa-circle  text-primary"></i>
-                                        <p>Semester</p>
+                                        <p>Semester List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'semster-panel-page' %}" class="nav-link">
+                                    <a href="{% url 'semster-panel-page' Filier.name %}" class="nav-link">
                                         <i class="nav-icon far fa-circle  text-primary"></i>
-                                        <p>module</p>
+                                        <p>module List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle  text-primary"></i>
-                                        <p>Courses</p>
+                                        <p>Courses List</p>
                                     </a>
                                 </li>
                             </ul>

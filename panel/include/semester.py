@@ -3,7 +3,7 @@ from django.http.response import Http404
 from django.shortcuts import render
 from eduction.models import *
 
-def SemesterPanelPage(request):
+def SemesterPanelPage(request,filier):
   try:
     context = {
     'Q_filier':Filier.objects.all(),
