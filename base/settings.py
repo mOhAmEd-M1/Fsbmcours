@@ -23,11 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^&m2(*7rd9g%hpmgc)o+53h9p3f%2dxqqifett&)5lcs5*sv3f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    "www.fsbmcours.com",
-    "fsbmcouurs.com",
+    "fsbmcours.com",
+    "localhost",
+    "127.0.0.1",
 ]
 
 
@@ -85,13 +86,23 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.fs__sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.fs__sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Db_fsbmcours',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'USER': 'fs_admin_db',
+        'PASSWORD': 'meD6910A.ma?fs',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
