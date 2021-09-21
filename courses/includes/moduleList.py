@@ -9,6 +9,10 @@ def module_list(request,filier,semester):
   try:
     fil__qs = Filier.objects.get(name = filier)
     sem__qs = Semester.objects.get(filierId = fil__qs.id, slug = semester)
+    shoow = sem__qs
+    shoow.show = shoow.show + 1
+    shoow.save()
+    print(f"shoow : {sem__qs.show}")
   except :
     return Http404()
   context = {
@@ -35,6 +39,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def backendmoduleList(request,semesterid):
+  if not request.user.is_superuser:
+    messages.warning(request, f"{request.user.username} You Are Not Admin ")
+    return redirect("backendIndex")
   semester_qs = Semester.objects.get(id = semesterid)
   filier_qs = Filier.objects.get(id = semester_qs.filierId)
   context = {
@@ -46,18 +53,13 @@ def backendmoduleList(request,semesterid):
   }
   return render(request,f'{backendmoduleListPath}list.html',context)
 
-# def moduleCreateViews(request,semesterid):
-#   context = {}
-#   return render(request,f"{backendmoduleListPath}create.html",context)
-
-
 
 class moduleCreateViews(OrganisorAndLoginRequiredMixin, generic.CreateView):
     template_name = f"{backendmoduleListPath}create.html"
     form_class = moduleModelForm
 
     def get_success_url(self, *args, **kwargs):
-        return reverse("backend-module-create", args=[int(self.kwargs['semesterid'])])
+        return reverse("moduleListurls:backend-module-create", args=[int(self.kwargs['semesterid'])])
 
     def form_valid(self, form , *args, **kwargs):
 

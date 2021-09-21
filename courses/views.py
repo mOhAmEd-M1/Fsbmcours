@@ -1,5 +1,5 @@
 import courses
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import *
 from django.http import Http404
 # Create your views here.
@@ -23,15 +23,6 @@ def index(request):
   }
   return render(request,'frontend/courses/index.html',context)
 
-
-def filier_list(request):
-  context = {}
-  return render(request,f'{re__path}/filierList.html',context)
-
-from courses.includes.semesterList import *
-from courses.includes.moduleList import *
-from courses.includes.courseList import *
-
 def indexBackend(request):
   context = {
      "Filires":Filier.objects.all(),
@@ -42,8 +33,12 @@ def indexBackend(request):
 
 backendFilierListPath = "backend/courses/filierList/"
 from .mixins import OrganisorAndLoginRequiredMixin
+from django.contrib import messages
 
 def backendFilierList(request):
+  if not request.user.is_superuser:
+      messages.warning(request, f"{request.user.username} You Are Not Admin ")
+      return redirect("backendIndex")
   context = {
     "Filires":Filier.objects.all(),
   }

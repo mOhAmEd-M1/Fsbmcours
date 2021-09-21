@@ -4,7 +4,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import  url
 from django.views.static import serve
-from courses import views
+from courses.views import (
+    indexBackend,
+    index,
+)
 from django.contrib.auth.views import (
     LoginView, 
     LogoutView, 
@@ -14,17 +17,7 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView
 )
 from courses.views import SignupView
-from courses.views import (
-    CategoryCreateView,
-    semesterCreateViews,
-    )
-from courses.includes.moduleList import (
-    moduleCreateViews,
-)
-from courses.includes.courseList import (
-    CoursesCreateViews,
-    # backendCoursesList,
-)
+
 urlpatterns = [
     url(r'^Media/(?P<path>.*)$',serve , {'document_root':settings.MEDIA_ROOT}),
     url(r'^static/(?P<path>.*)$',serve , {'document_root':settings.STATIC_ROOT}),
@@ -38,52 +31,20 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
 
+    path('courses/',  include('courses.urls')),
+    path('dashboard/filier/',  include('courses.backend_urls.filierListurls')),#, namespace="filierListurls"
+    path('dashboard/semester/',  include('courses.backend_urls.semesterListurls')),#, namespace="semesterListurls"
+    path('dashboard/module/',  include('courses.backend_urls.moduleListurls', namespace="moduleListurls")),#
+    path('dashboard/course/',  include('courses.backend_urls.courseListurls', namespace="courseListurls")),#
+
     # ---Courses Urls----
     # _FrontEnd's Urls: --
 
-    path("",views.index,name="index__page"),
+    path("",index,name="index__page"),
 
-    path('courses/filier-Detail/',views.filier_list, name='front-filier-list'),
-    path('courses/<filier>/',views.semester_list, name='front-semester-list'),
-    path('courses/<filier>/<semester>/',views.module_list, name='front-module-list'),
-    path('courses/<filier>/<semester>/<modl>/',views.course_list, name='front-course-list'),
-    # _BackEnd's Urls: 
-
-    path('AdminPanel/', views.indexBackend , name = "backendIndex"),
-    # filierList :
-    path('AdminPanel/courses/filier-List/',views.backendFilierList, name = "backend-Filier-List" ),
-    # path('categories/', CategoryListView.as_view(), name='category-list'),
-    # path('categories/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
-    # path('categories/<int:pk>/update/', CategoryUpdateView.as_view(), name='category-update'),
-    # path('categories/<int:pk>/delete/', CategoryDeleteView.as_view(), name='category-delete'),
-    path('AdminPanel/courses/filier-create/', CategoryCreateView.as_view(), name='backend-Filier-create'),
+       # _BackEnd's Urls: 
+    path('dashboard/', indexBackend , name = "backendIndex"),
     
-     # SmesterList :
-    path('AdminPanel/courses/Semester-List/',views.backendSemesetrList, name = "backend-Semester-List" ),
-    # path('categories/', CategoryListView.as_view(), name='category-list'),
-    # path('categories/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
-    # path('categories/<int:pk>/update/', CategoryUpdateView.as_view(), name='category-update'),
-    # path('categories/<int:pk>/delete/', CategoryDeleteView.as_view(), name='category-delete'),
-    path('AdminPanel/courses/Semester-create/', views.semesterCreateViews, name='backend-Semester-create'),
-    
-     # moduleList :
-    path('AdminPanel/courses/<int:semesterid>/module-List/',views.backendmoduleList, name = "backend-module-List" ),
-    # path('categories/', CategoryListView.as_view(), name='category-list'),
-    # path('categories/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
-    # path('categories/<int:pk>/update/', CategoryUpdateView.as_view(), name='category-update'),
-    # path('categories/<int:pk>/delete/', CategoryDeleteView.as_view(), name='category-delete'),
-    # path('AdminPanel/courses/<int:semesterid>/module-create/', views.moduleCreateViews, name='backend-module-create'),
-    path('AdminPanel/courses/<int:semesterid>/module-create/', moduleCreateViews.as_view(), name='backend-module-create'),
-    
-
-     # coursesList :
-    path('AdminPanel/courses/<int:moduleID>/courses-List/',views.backendCoursesList, name = "backend-courses-List" ),
-    # path('categories/', CategoryListView.as_view(), name='category-list'),
-    # path('categories/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
-    # path('categories/<int:pk>/update/', CategoryUpdateView.as_view(), name='category-update'),
-    # path('categories/<int:pk>/delete/', CategoryDeleteView.as_view(), name='category-delete'),
-    # path('AdminPanel/courses/<int:semesterid>/module-create/', views.moduleCreateViews, name='backend-module-create'),
-    path('AdminPanel/courses/<int:moduleID>/courses-create/', views.CoursesCreateViews, name='backend-courses-create'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

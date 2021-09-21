@@ -24,6 +24,9 @@ def course_list(request,filier,semester,modl):
     fil__qs = Filier.objects.get(name = filier)
     sem__qs = Semester.objects.get(filierId = fil__qs.id, slug = semester)
     modl__qs = Module.objects.get(filierid = fil__qs.id,semmesterid = sem__qs.id,slug = modl)
+    shoow = modl__qs
+    shoow.show = shoow.show + 1
+    shoow.save()
   except :
     raise Http404()
   context = {
@@ -48,8 +51,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
+@login_required
 def backendCoursesList(request,moduleID):
-
+  if not request.user.is_superuser:
+    messages.warning(request, f"{request.user.username} You Are Not Admin ")
+    return redirect("backendIndex")
+    # ...
   module_qs = Module.objects.get(id = moduleID )
   semester_qs = Semester.objects.get(id = module_qs.semmesterid)
   filier_qs = Filier.objects.get(id = semester_qs.filierId)
@@ -133,8 +140,12 @@ def backendCoursesList(request,moduleID):
 #           messages.success(self.request, "problen")
 
 #       return super(CoursesCreateViews, self).form_valid(form)
-
+@login_required
 def CoursesCreateViews(request,moduleID):
+    if not request.user.is_superuser:
+      messages.warning(request, f"{request.user.username} You Are Not Admin ")
+      return redirect("backendIndex")
+
     module_qs = Module.objects.get(id = moduleID)
     semester_qs = Semester.objects.get(id = module_qs.semmesterid)
     filier_qs = Filier.objects.get(id = semester_qs.filierId )
@@ -179,7 +190,7 @@ def CoursesCreateViews(request,moduleID):
             messages.success(request, f" {name} Created successfuly")
         else:
           messages.warning(request, "From is not valid")
-        return redirect("backend-courses-create",moduleID)
+        return redirect("courseListurls:backend-courses-create",moduleID)
     context = {
         "form": form,
         "Module_list":module_qs,

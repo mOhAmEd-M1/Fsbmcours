@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
 from courses.models import *
 from django.http import Http404
 from django.views import generic
@@ -8,6 +8,10 @@ re__path = "frontend/courses/"
 def semester_list(request,filier):
   try:
     fil__qs = Filier.objects.get(name = filier)
+    shoow = fil__qs
+    shoow.show = shoow.show + 1
+    shoow.save()
+
   except :
     return Http404()
   context = {
@@ -29,6 +33,9 @@ from courses.forms import semesterModelForm
 from django.contrib import messages
 
 def backendSemesetrList(request):
+  if not request.user.is_superuser:
+    messages.warning(request, f"{request.user.username} You Are Not Admin ")
+    return redirect("backendIndex")
   context = {
     "Filires":Filier.objects.all(),
     "semester":Semester.objects.all(),
@@ -36,6 +43,9 @@ def backendSemesetrList(request):
   return render(request,f"{backendsemesterListPath}list.html",context)
 
 def semesterCreateViews(request):
+  if not request.user.is_superuser:
+    messages.warning(request, f"{request.user.username} You Are Not Admin ")
+    return redirect("backendIndex")
   if request.method or request.method == "POST":
     forms = semesterModelForm(request.POST or None)
     if forms.is_valid():

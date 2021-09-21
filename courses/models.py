@@ -36,7 +36,7 @@ def user_directory_path(instance,filename):
         month = 'November'
     elif month == 12:
         month = 'December'
-    path =f"Course/{todays_date.day}{month}-{todays_date.year}/"
+    path =f"{todays_date.year}/Course/pdf/"
     extension = "." + filename.split('.')[-1]
     stringId = str(uuid.uuid4())
     randInt = str(random.randint(0, 9))

@@ -24,7 +24,7 @@
             {% for category in semester %}
                 <tr>
                     <td class="px-4 py-3">
-                      <a class="hover:text-blue-500" href="{% url 'backend-module-List' category.id  %}">{{ category.name }}</a>
+                      <a class="hover:text-blue-500" href="{% url 'moduleListurls:backend-module-List' category.id  %}">{{ category.name }}</a>
                     </td>
                     {% for fil in Filires %}
                       {% if fil.pk == category.filierId %}
